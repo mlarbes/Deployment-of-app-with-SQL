@@ -115,17 +115,43 @@
       },
       "resources": [
         {
-          "name": "AllowAllWindowsAzureIps",
-          "type": "firewallrules",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', parameters('D1'))]"
-          ],
-          "properties": {
-            "startIpAddress": "0.0.0.0",
-            "endIpAddress": "0.0.0.0"
-          }
+         "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments/rules/baselines",
+         "apiVersion": "2018-06-01-preview",
+         "name": "[concat(parameters('server_name'),'/', parameters('database_name') , '/default/VA2065/master')]",
+         "properties": {
+            "baselineResults": [
+               {
+                  "result": [
+                     "FirewallRuleName3",
+                     "StartIpAddress",
+                     "EndIpAddress"
+                  ]
+               },
+               {
+                  "result": [
+                     "FirewallRuleName4",
+                     "62.92.15.68",
+                     "62.92.15.68"
+                  ]
+               }
+            ]
+         },
+         "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments/rules/baselines",
+         "apiVersion": "2018-06-01-preview",
+         "name": "[concat(parameters('server_name'),'/', parameters('database_name'), '/default/VA2130/Default')]",
+         "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers/vulnerabilityAssessments', parameters('server_name'), 'Default')]"
+         ],
+         "properties": {
+            "baselineResults": [
+               {
+                  "result": [
+                     "dbo"
+                  ]
+               }
+            ]
+         }
+      }
         },
         {
           "name": "[parameters('D1')]",
@@ -146,6 +172,7 @@
           }
         }
       ]
-    }],
+    }
+],
   "outputs": {}
 }
