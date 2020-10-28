@@ -115,6 +115,16 @@
       },
       "resources": [
         {
+                    "apiVersion": "2020-02-02-preview",
+                    "type": "securityAlertPolicies",
+                    "name": "default",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers/databases', variables('databaseServerName'), variables('databaseNames')[copyIndex()])]"
+                    ],
+                    "properties": {
+                        "state": "Enabled"
+                    }}
+        {
   "name": "string",
   "type": "Microsoft.Sql/servers/vulnerabilityAssessments",
   "apiVersion": "2018-06-01-preview",
